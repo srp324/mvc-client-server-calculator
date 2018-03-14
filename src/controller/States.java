@@ -2,7 +2,7 @@ package controller;
 
 import java.io.Serializable;
 
-public enum State implements Serializable {
+public enum States implements Serializable {
     START,
     FIRSTOP,
     NEXTOP,

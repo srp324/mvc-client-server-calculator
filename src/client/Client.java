@@ -9,6 +9,7 @@ public class Client {
     private ObjectInputStream in;
     private ObjectOutputStream out;
 
+    //TODO: Separate client and server into two projects
     /***
      * Slide 2
      * -This is going to be a rich client application.

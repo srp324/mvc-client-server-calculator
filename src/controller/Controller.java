@@ -9,7 +9,11 @@ import java.awt.event.ActionListener;
 public class Controller {
     View view;
     CalcModel model;
-    //State currState;
+    States states;
+
+    Controller() {
+        states = States.START;
+    }
 
     // 1. Modifies model (calcModel -> calcList)
     class DigitListener implements ActionListener {
@@ -20,6 +24,8 @@ public class Controller {
         }
 
         public void actionPerformed(ActionEvent e) {
+            //TODO: Call state.handle(this)
+
             model.digitOperation(digit);
         }
     }

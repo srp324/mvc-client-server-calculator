@@ -1,6 +1,6 @@
 package model;
 
-import controller.State;
+import controller.States;
 import controller.Command;
 
 public class CalcList {
@@ -9,54 +9,54 @@ public class CalcList {
     public Integer lhs;
     public Integer rhs;
 
-    public State state;
+    //TODO: Remove when controller states are implemented
+    public States states;
 
     CalcList() {
-        state = State.START;
+        states = States.START;
         equation = "";
         full = "";
     }
 
-    // TODO: How do I follow the state pattern for this?
     public void transition(Command comm) {
-        if (state == State.START) {
+        if (states == States.START) {
             if (isDigit(comm)) {
                 equation = equation + comm.getValue();
-                state = State.FIRSTOP;
+                states = States.FIRSTOP;
             }
             else if (comm == Command.ADD)
-                state = State.ERROR;
+                states = States.ERROR;
         }
-        else if (state == State.FIRSTOP) {
+        else if (states == States.FIRSTOP) {
             if (isDigit(comm)) {
                 equation = equation + comm.getValue();
             }
             else if (comm == Command.ADD) {
                 lhs = Integer.parseInt(equation);
                 equation = "";
-                state = State.NEXTOP;
+                states = States.NEXTOP;
             }
         }
-        else if (state == State.NEXTOP) {
+        else if (states == States.NEXTOP) {
             if (isDigit(comm)) {
                 equation = comm.getValue();
-                state = State.SECONDOP;
+                states = States.SECONDOP;
             }
             else if (comm == Command.ADD)
-                state = State.ERROR;
+                states = States.ERROR;
         }
-        else if (state == State.SECONDOP) {
+        else if (states == States.SECONDOP) {
             if (isDigit(comm))
                 equation = equation + comm.getValue();
             else if (comm == Command.ADD) {
                 rhs = Integer.parseInt(equation);
                 equation = Integer.toString(lhs + rhs);
                 lhs = Integer.parseInt(equation);
-                state = State.NEXTOP;
+                states = States.NEXTOP;
             }
         }
 
-        if (state == State.ERROR)
+        if (states == States.ERROR)
             equation = "error";
     }
 
