@@ -13,6 +13,7 @@ public enum Command implements Serializable {
     EIGHT("8"),
     NINE("9"),
     ZERO("0"),
+    DIGIT(""),
 
     ADD("+"),
     SUB("-"),

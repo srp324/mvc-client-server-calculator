@@ -1,5 +1,7 @@
 package controller;
 
+import controller.state.StartState;
+import controller.state.State;
 import model.CalcModel;
 import view.View;
 
@@ -9,13 +11,13 @@ import java.awt.event.ActionListener;
 public class Controller {
     View view;
     CalcModel model;
-    States states;
+    State state;
+    Command command;
 
     Controller() {
-        states = States.START;
+        state = new StartState();
     }
 
-    // 1. Modifies model (calcModel -> calcList)
     class DigitListener implements ActionListener {
         private Integer digit;
 
@@ -24,15 +26,20 @@ public class Controller {
         }
 
         public void actionPerformed(ActionEvent e) {
-            //TODO: Call state.handle(this)
+            //Controller State is changed based on Command
+            command = Command.DIGIT;
+            state.handle(Controller.this);
 
             model.digitOperation(digit);
         }
     }
 
-    // 1. Modifies model (calcModel -> calcList)
     class AddListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            //Controller State is changed based on Command
+            command = Command.ADD;
+            state.handle(Controller.this);
+
             model.addOperation(view.getDisplay());
         }
     }
