@@ -4,7 +4,7 @@ import controller.Controller;
 
 public class SecondOpState implements State {
     @Override
-    public void handle(Controller controller) {
+    public void handle(Controller context) {
 
     }
 }
