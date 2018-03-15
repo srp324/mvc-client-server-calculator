@@ -3,6 +3,8 @@ package controller;
 import java.io.Serializable;
 
 public enum Command implements Serializable {
+
+    DIGIT(""),
     ONE("1"),
     TWO ("2"),
     THREE("3"),
@@ -13,8 +15,8 @@ public enum Command implements Serializable {
     EIGHT("8"),
     NINE("9"),
     ZERO("0"),
-    DIGIT(""),
 
+    OP(""),
     ADD("+"),
     SUB("-"),
     MULT("*"),
@@ -57,5 +59,23 @@ public enum Command implements Serializable {
                 return Command.ZERO;
         }
         return Command.DIGIT;
+    }
+
+    public Command getOp(String op) {
+        switch (op) {
+            case "+":
+                return Command.ADD;
+            case "-":
+                return Command.SUB;
+            case "*":
+                return Command.MULT;
+            case "/":
+                return Command.DIV;
+            case "=":
+                return Command.EQ;
+            case "C":
+                return Command.CLEAR;
+        }
+        return Command.OP;
     }
 }
