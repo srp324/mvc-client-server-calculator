@@ -1,7 +1,6 @@
 package controller;
 
-import controller.state.StartState;
-import controller.state.State;
+import controller.state.*;
 import model.CalcModel;
 import view.View;
 
@@ -14,7 +13,7 @@ public class Controller {
     State state;
     Command command;
 
-    Controller() {
+    public Controller() {
         state = new StartState();
     }
 
@@ -27,10 +26,23 @@ public class Controller {
 
         public void actionPerformed(ActionEvent e) {
             //Controller State is changed based on Command
-            command = Command.DIGIT;
+
+            command = Command.DIGIT.getDigit(digit);
             state.handle(Controller.this);
 
-            model.digitOperation(digit);
+            if (state instanceof FirstOpState) {
+                System.out.println("State: FirstOp");
+                model.update();
+            }
+            else if (state instanceof SecondOpState) {
+                System.out.println("State: SecondOp");
+                model.update();
+            }
+            else if (state instanceof ErrorState) {
+                //TODO
+                System.out.println("State: ErrorOp");
+                model.update();
+            }
         }
     }
 
@@ -40,7 +52,16 @@ public class Controller {
             command = Command.ADD;
             state.handle(Controller.this);
 
-            model.addOperation(view.getDisplay());
+            if (state instanceof NextOpState) {
+                System.out.println("State: NextOp");
+
+                //model.addOperation(view.getDisplay());
+                model.update();
+            }
+            else if (state instanceof ErrorState) {
+                //TODO
+                System.out.println("State: ErrorOp");
+            }
         }
     }
 
@@ -62,5 +83,17 @@ public class Controller {
         view.getJbtNum9().addActionListener(new DigitListener(9));
         view.getJbtNum0().addActionListener(new DigitListener(0));
         view.getJbtAdd().addActionListener(new AddListener());
+    }
+
+    public void setState(State s) {
+        this.state = s;
+    }
+
+    public Command getCommand() {
+        return command;
+    }
+
+    public CalcModel getModel() {
+        return model;
     }
 }

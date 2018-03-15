@@ -1,7 +1,5 @@
 package model;
 
-import controller.Command;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,48 +16,11 @@ public class CalcModel extends CalcList {
         super();
     }
 
-    // 2. Transitions model state and then processesEvent to update the view
-    public void digitOperation(Integer digit) {
-        switch (digit) {
-            case 1:
-                transition(Command.ONE);
-                break;
-            case 2:
-                transition(Command.TWO);
-                break;
-            case 3:
-                transition(Command.THREE);
-                break;
-            case 4:
-                transition(Command.FOUR);
-                break;
-            case 5:
-                transition(Command.FIVE);
-                break;
-            case 6:
-                transition(Command.SIX);
-                break;
-            case 7:
-                transition(Command.SEVEN);
-                break;
-            case 8:
-                transition(Command.EIGHT);
-                break;
-            case 9:
-                transition(Command.NINE);
-                break;
-            case 0:
-                transition(Command.ZERO);
-                break;
-        }
-        processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "digit"));
-    }
+    //TODO: Change the *Operations to update()?
 
     // 2. Transitions model state and then processesEvent to update the view
-    public void addOperation(String display) {
-        transition(Command.ADD);
-        full = full + " + ";
-        processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add"));
+    public void update() {
+        processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "update"));
     }
 
     /**

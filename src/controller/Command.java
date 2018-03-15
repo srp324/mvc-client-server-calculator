@@ -32,4 +32,30 @@ public enum Command implements Serializable {
     public String getValue() {
         return value;
     }
+    
+    public Command getDigit(Integer digit) {
+        switch (digit) {
+            case 1:
+                return Command.ONE;
+            case 2:
+                return Command.TWO;
+            case 3:
+                return Command.THREE;
+            case 4:
+                return Command.FOUR;
+            case 5:
+                return Command.FIVE;
+            case 6:
+                return Command.SIX;
+            case 7:
+                return Command.SEVEN;
+            case 8:
+                return Command.EIGHT;
+            case 9:
+                return Command.NINE;
+            case 0:
+                return Command.ZERO;
+        }
+        return Command.DIGIT;
+    }
 }

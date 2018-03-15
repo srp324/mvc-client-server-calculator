@@ -34,8 +34,8 @@ public class Client {
      *
      * Slide 6:
      * - The controller should be the observer of the GUI, and take the context role of the state pattern.
-     * - Remember that controller.Controller in MVC is a component, which may contain multiple classes
-     * - controller.Controller class is the context in the state pattern, and individual state control state change, and controller just holds the current state.
+     * - Remember that Controller in MVC is a component, which may contain multiple classes
+     * - Controller class is the context in the state pattern, and individual state control state change, and controller just holds the current state.
      * Q: You mean state pattern classes are controller part itself?
      * A:  Yes, you can say that.
      *
@@ -64,12 +64,6 @@ public class Client {
      * State Pattern Slide 6: A context may pass itself as an argument to the State object handling the
                               request. This lets the State object access the context if necessary
      * So essentially, the controller will call state.handle(this) and is able to access the composite model from there.
-     *
-     * State Patterns Last Slide:
-     * Where to define the state transitions ?
-        - If criteria is fixed, transition can be defined in the context.
-        - More flexible if transition is specified in the State subclass.
-        - Introduces dependencies between subclasses.
 
 
 
