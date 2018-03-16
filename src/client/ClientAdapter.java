@@ -29,7 +29,7 @@ public class ClientAdapter {
         controller.setView(calcView);
         calcView.init(model);
 
-        System.out.println((String) client.receiveMsg());
+        //System.out.println((String) client.receiveMsg());
     }
 
     /*public static void sendDisplay(Command comm) {
