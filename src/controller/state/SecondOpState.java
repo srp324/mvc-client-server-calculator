@@ -36,6 +36,13 @@ public class SecondOpState implements State {
                     break;
             }
 
+            CalcVisitor cv = new CalcVisitor();
+            context.getModel().getTree().accept(cv);
+            context.getModel().lhs = cv.getValue();
+            cv.setValue(0);
+
+            FullVisitor fv = new FullVisitor();
+            context.getModel().getTree().accept(fv);
             context.setState(new NextOpState());
         }
         else if (isEquals(context.getCommand())) {
