@@ -7,7 +7,7 @@ public class Client {
 
     private Socket s1;
     private ObjectInputStream in;
-    private ObjectOutputStream out;
+    private static ObjectOutputStream out;
 
     //TODO: Separate client and server into two projects
     /***
@@ -91,7 +91,7 @@ public class Client {
      * @param m1
      ****************************************************/
 
-    public void sendMsg(Object m1) {
+    public static void sendMsg(Object m1) {
         try {
             out.writeObject(m1);
             out.flush();

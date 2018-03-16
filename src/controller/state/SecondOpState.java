@@ -1,5 +1,6 @@
 package controller.state;
 
+import client.Client;
 import controller.Controller;
 import model.CalcVisitor;
 import model.FullVisitor;
@@ -34,6 +35,10 @@ public class SecondOpState implements State {
                     context.getModel().equation = Integer.toString(context.getModel().lhs / context.getModel().rhs);
                     break;
             }
+
+            context.setState(new NextOpState());
+        }
+        else if (isEquals(context.getCommand())) {
             CalcVisitor cv = new CalcVisitor();
             context.getModel().getTree().accept(cv);
             context.getModel().lhs = cv.getValue();
@@ -41,12 +46,8 @@ public class SecondOpState implements State {
 
             FullVisitor fv = new FullVisitor();
             context.getModel().getTree().accept(fv);
-            System.out.println(fv.getFull() + " = " + context.getModel().lhs);
-
-            context.setState(new NextOpState());
-        }
-        else if (isEquals(context.getCommand())) {
-            //TODO: Calculate tree
+            Client.sendMsg(fv.getFull() + " = " + context.getModel().lhs);
+            context.getModel().equation = Integer.toString(context.getModel().lhs);
             context.setState(new CalcState());
         }
         else if (isClear(context.getCommand())) {
