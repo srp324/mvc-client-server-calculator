@@ -1,7 +1,5 @@
 package view;
 
-import model.CalcModel;
-
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
