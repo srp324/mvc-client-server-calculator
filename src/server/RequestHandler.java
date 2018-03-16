@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,13 +23,11 @@ public class RequestHandler extends Thread{
             out = new ObjectOutputStream(this.clientSocket.getOutputStream());
 
             Object input = receiveMsg();
-            while (!input.equals("quit")) {
+            while (input != null && !input.equals("quit")) {
                 System.out.println(input);
                 input = receiveMsg();
             }
 
-            sendMsg("bye");
-            System.out.println("Sent back list!");
             clientSocket.shutdownOutput();
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,7 +58,7 @@ public class RequestHandler extends Thread{
                 return obj;
 
         } catch (Exception e) {                     //Could not get input from reading; notify sending player
-            e.printStackTrace();
+            System.out.println("Client disconnected.");
         }
 
         return receivedMsg;
