@@ -34,4 +34,7 @@ public class CalcList {
     public void clearNodes() {
         tree = v -> {};
     }
+    public String getEquation() {
+        return equation;
+    }
 }

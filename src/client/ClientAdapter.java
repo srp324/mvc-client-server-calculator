@@ -19,7 +19,6 @@ public class ClientAdapter {
             System.exit(0);
         }
 
-
         //Driver
         View calcView = new View();
         CalcModel model = new CalcModel();
@@ -27,12 +26,7 @@ public class ClientAdapter {
 
         controller.setModel(model);
         controller.setView(calcView);
-        calcView.init(model);
-
-        //System.out.println((String) client.receiveMsg());
+        controller.addObserver(calcView);
+        calcView.init();
     }
-
-    /*public static void sendDisplay(Command comm) {
-        client.sendMsg(comm);
-    }*/
 }

@@ -17,7 +17,7 @@ public class Server {
 
                 RequestHandler rh = new RequestHandler(client);
                 rh.start();
-                System.out.println("Started request handler!");
+                System.out.println("A client has connected!");
             }
         } catch (IOException e1) {
             e1.printStackTrace();

@@ -6,8 +6,9 @@ import view.View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
-public class Controller {
+public class Controller extends Observable {
     View view;
     CalcModel model;
     State state;
@@ -25,46 +26,20 @@ public class Controller {
         }
 
         public void actionPerformed(ActionEvent e) {
-            //Controller State is changed based on Command
-
             command = Command.DIGIT.getDigit(digit);
             state.handle(Controller.this);
 
-            /*if (state instanceof FirstOpState) {
-                System.out.println("State: FirstOp");
-                model.update();
-            }
-            else if (state instanceof SecondOpState) {
-                System.out.println("State: SecondOp");
-                model.update();
-            }
+            /*
             else if (state instanceof ErrorState) {
                 //TODO
                 System.out.println("State: ErrorOp");
                 model.update();
             }*/
-            model.update();
+
+            setChanged();
+            notifyObservers(model.equation);
         }
     }
-
-    /*class AddListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            //Controller State is changed based on Command
-            command = Command.ADD;
-            state.handle(Controller.this);
-
-            if (state instanceof NextOpState) {
-                System.out.println("State: NextOp");
-
-                //model.addOperation(view.getDisplay());
-                model.update();
-            }
-            else if (state instanceof ErrorState) {
-                System.out.println("State: ErrorOp");
-                model.update();
-            }
-        }
-    }*/
 
     class OpListener implements ActionListener {
         private String op;
@@ -77,15 +52,8 @@ public class Controller {
             command = Command.OP.getOp(op);
             state.handle(Controller.this);
 
-            /*if (state instanceof NextOpState) {
-                System.out.println("State: NextOp");
-                model.update();
-            }
-            else if (state instanceof ErrorState) {
-                System.out.println("State: ErrorOp");
-                model.update();
-            }*/
-            model.update();
+            setChanged();
+            notifyObservers(model.equation);
         }
     }
 
@@ -112,6 +80,8 @@ public class Controller {
         view.getJbtDivide().addActionListener(new OpListener("/"));
         view.getJbtEqual().addActionListener(new OpListener("="));
         view.getJbtClear().addActionListener(new OpListener("C"));
+
+        //TODO: Set Reset and Discard Action Listeners
     }
 
     public void setState(State s) {
