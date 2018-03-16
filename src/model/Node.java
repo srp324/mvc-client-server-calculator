@@ -15,7 +15,8 @@ public class Node implements TreeComponent {
     public void accept(Visitor v) {
         v.visitPreNode(this);
         left.accept(v);
-        right.accept(v);
+        if (right != null)
+            right.accept(v);
         v.visitPostNode(this);
     }
 

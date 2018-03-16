@@ -6,8 +6,12 @@ public class NextOpState implements State {
     @Override
     public void handle(Controller context) {
         if (isDigit(context.getCommand())) {
+
             context.getModel().equation = context.getCommand().getValue();
             context.getModel().full += context.getCommand().getValue();
+
+            context.getModel().addRightLeaf(context.getModel().equation); //Right leaf
+
             context.setState(new SecondOpState());
         }
         else if (isOp(context.getCommand()) || isEquals(context.getCommand())) {

@@ -10,6 +10,10 @@ public class FirstOpState implements State {
             context.getModel().full += context.getCommand().getValue();
         }
         else if (isOp(context.getCommand())) {
+            context.getModel().addNode(context.getCommand().getValue(), context.getModel().equation, true); //Left leaf
+
+            context.getModel().currOp = context.getCommand().getValue();
+
             context.getModel().lhs = Integer.parseInt(context.getModel().equation);
             context.getModel().equation = "";
             context.getModel().full += " " + context.getCommand().getValue() + " ";

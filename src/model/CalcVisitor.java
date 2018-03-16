@@ -46,4 +46,7 @@ public class CalcVisitor implements Visitor {
     public Integer getValue() {
         return value;
     }
+    public void setValue(Integer _value) {
+        value = _value;
+    }
 }
