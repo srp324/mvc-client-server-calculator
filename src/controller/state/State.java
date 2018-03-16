@@ -3,9 +3,9 @@ package controller.state;
 import controller.Command;
 import controller.Controller;
 
+//TODO: Use the model's visitors
 public interface State {
     void handle(Controller context);
-
 
     default boolean isDigit(Command comm) {
         return (comm == Command.ONE ||
@@ -19,5 +19,21 @@ public interface State {
                 comm == Command.NINE ||
                 comm == Command.ZERO
         );
+    }
+
+    default boolean isOp(Command comm) {
+        return (comm == Command.ADD ||
+                comm == Command.SUB ||
+                comm == Command.MULT ||
+                comm == Command.DIV
+        );
+    }
+
+    default boolean isEquals(Command comm) {
+        return comm == Command.EQ;
+    }
+
+    default boolean isClear(Command comm) {
+        return comm == Command.CLEAR;
     }
 }

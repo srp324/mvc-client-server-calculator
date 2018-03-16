@@ -1,6 +1,5 @@
 package controller.state;
 
-import controller.Command;
 import controller.Controller;
 
 public class FirstOpState implements State {
@@ -8,22 +7,27 @@ public class FirstOpState implements State {
     public void handle(Controller context) {
         if (isDigit(context.getCommand())) {
             context.getModel().equation += context.getCommand().getValue();
+            context.getModel().full += context.getCommand().getValue();
         }
-        else if (context.getCommand() == Command.ADD) {
+        else if (isOp(context.getCommand())) {
             context.getModel().lhs = Integer.parseInt(context.getModel().equation);
             context.getModel().equation = "";
+            context.getModel().full += " " + context.getCommand().getValue() + " ";
             context.setState(new NextOpState());
         }
+        else if (isEquals(context.getCommand())) {
+            context.getModel().lhs = null;
+            context.getModel().rhs = null;
+            context.getModel().equation = "error";
+            context.getModel().full = "";
+            context.setState(new ErrorState());
+        }
+        else if (isClear(context.getCommand())) {
+            context.getModel().lhs = null;
+            context.getModel().rhs = null;
+            context.getModel().equation = "";
+            context.getModel().full = "";
+            context.setState(new StartState());
+        }
     }
-
-    /*
-    if (isDigit(comm)) {
-                equation = equation + comm.getValue();
-            }
-            else if (comm == Command.ADD) {
-                lhs = Integer.parseInt(equation);
-                equation = "";
-                states = States.NEXTOP;
-            }
-     */
 }
