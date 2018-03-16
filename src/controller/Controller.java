@@ -30,7 +30,7 @@ public class Controller {
             command = Command.DIGIT.getDigit(digit);
             state.handle(Controller.this);
 
-            if (state instanceof FirstOpState) {
+            /*if (state instanceof FirstOpState) {
                 System.out.println("State: FirstOp");
                 model.update();
             }
@@ -42,7 +42,8 @@ public class Controller {
                 //TODO
                 System.out.println("State: ErrorOp");
                 model.update();
-            }
+            }*/
+            model.update();
         }
     }
 
@@ -76,14 +77,15 @@ public class Controller {
             command = Command.OP.getOp(op);
             state.handle(Controller.this);
 
-            if (state instanceof NextOpState) {
+            /*if (state instanceof NextOpState) {
                 System.out.println("State: NextOp");
                 model.update();
             }
             else if (state instanceof ErrorState) {
                 System.out.println("State: ErrorOp");
                 model.update();
-            }
+            }*/
+            model.update();
         }
     }
 

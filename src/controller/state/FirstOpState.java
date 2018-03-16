@@ -31,6 +31,7 @@ public class FirstOpState implements State {
             context.getModel().rhs = null;
             context.getModel().equation = "";
             context.getModel().full = "";
+            context.getModel().clearNodes();
             context.setState(new StartState());
         }
     }
