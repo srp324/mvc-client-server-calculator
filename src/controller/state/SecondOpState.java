@@ -29,8 +29,15 @@ public class SecondOpState implements State {
                 case "*":
                     context.getModel().equation = Integer.toString(context.getModel().lhs * context.getModel().rhs);
                     break;
-                case "/": //TODO: Check if rhs == 0
-                    context.getModel().equation = Integer.toString(context.getModel().lhs / context.getModel().rhs);
+                case "/":
+                    if (context.getModel().rhs == 0) {
+                        context.getModel().onError = "S";
+                        context.getModel().equation = "error";
+                        context.setState(new ErrorState());
+                        return;
+                    }
+                    else
+                        context.getModel().equation = Integer.toString(context.getModel().lhs / context.getModel().rhs);
                     break;
             }
 
@@ -44,16 +51,22 @@ public class SecondOpState implements State {
             context.setState(new NextOpState());
         }
         else if (isEquals(context.getCommand())) {
-            CalcVisitor cv = new CalcVisitor();
-            context.getModel().getTree().accept(cv);
-            context.getModel().lhs = cv.getValue();
-            cv.setValue(0);
+            if (context.getModel().currOp.equals("/") && context.getModel().equation.equals("0")) {
+                context.getModel().onError = "S";
+                context.getModel().equation = "error";
+                context.setState(new ErrorState());
+                return;
+            }
+                CalcVisitor cv = new CalcVisitor();
+                context.getModel().getTree().accept(cv);
+                context.getModel().lhs = cv.getValue();
+                cv.setValue(0);
 
-            FullVisitor fv = new FullVisitor();
-            context.getModel().getTree().accept(fv);
-            Client.sendMsg(fv.getFull() + " = " + context.getModel().lhs);
-            context.getModel().equation = Integer.toString(context.getModel().lhs);
-            context.setState(new CalcState());
+                FullVisitor fv = new FullVisitor();
+                context.getModel().getTree().accept(fv);
+                Client.sendMsg(fv.getFull() + " = " + context.getModel().lhs);
+                context.getModel().equation = Integer.toString(context.getModel().lhs);
+                context.setState(new CalcState());
         }
         else if (isClear(context.getCommand())) {
             context.getModel().lhs = null;
