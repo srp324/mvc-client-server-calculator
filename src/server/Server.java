@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+//TODO: Split Server and Client
 public class Server {
-
-    private static int portNum;
+    private static Integer count;
 
     public static void main(String[] args) {
-        portNum = Integer.parseInt(args[0]);
+        Integer portNum = Integer.parseInt(args[0]);
+        count = 0;
 
         try (ServerSocket ss = new ServerSocket(portNum)) {         //Listen For Connections
             while (true) {
@@ -22,5 +23,9 @@ public class Server {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+    }
+
+    public static void printCount() {
+        System.out.println("Number of successfully calculated math equations: " + (++count));
     }
 }

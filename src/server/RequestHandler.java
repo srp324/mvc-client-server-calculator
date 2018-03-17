@@ -4,17 +4,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class RequestHandler extends Thread{
     private Socket clientSocket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
 
-    public RequestHandler(Socket clientSocket) {
-        this.clientSocket = clientSocket;
+    public RequestHandler(Socket _clientSocket) {
+        clientSocket = _clientSocket;
     }
 
     public void run() {
@@ -23,8 +20,12 @@ public class RequestHandler extends Thread{
             out = new ObjectOutputStream(this.clientSocket.getOutputStream());
 
             Object input = receiveMsg();
-            while (input != null && !input.equals("quit")) {
+            while (input != null) {
+                //Print out equation and count
                 System.out.println(input);
+                Server.printCount();
+
+                //Block until another message
                 input = receiveMsg();
             }
 
@@ -32,20 +33,6 @@ public class RequestHandler extends Thread{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public ObjectInputStream getIn() {
-        return in;
-    }
-    public void setIn(ObjectInputStream in) {
-        this.in = in;
-    }
-
-    public ObjectOutputStream getOut() {
-        return out;
-    }
-    public void setOut(ObjectOutputStream out) {
-        this.out = out;
     }
 
     private Object receiveMsg(){
@@ -72,14 +59,4 @@ public class RequestHandler extends Thread{
             e.printStackTrace();
         }
     }
-
-    private ArrayList<Integer> filterOdds(ArrayList<Integer> input) {
-        ArrayList<Integer> oddsList = new ArrayList<>();
-        for (Integer num : input)
-            if (num % 2 == 1)
-                oddsList.add(num);
-
-        return oddsList;
-    }
-
 }
