@@ -10,8 +10,6 @@ public class SecondOpState implements State {
     public void handle(Controller context) {
         if (isDigit(context.getCommand())) {
             context.getModel().equation += context.getCommand().getValue();
-            context.getModel().full += context.getCommand().getValue();
-
             context.getModel().addRightLeaf(context.getModel().equation);
         }
         else if (isOp(context.getCommand())) {
@@ -61,7 +59,6 @@ public class SecondOpState implements State {
             context.getModel().lhs = null;
             context.getModel().rhs = null;
             context.getModel().equation = "";
-            context.getModel().full = "";
             context.getModel().clearNodes();
             context.setState(new StartState());
         }

@@ -8,7 +8,6 @@ public class NextOpState implements State {
         if (isDigit(context.getCommand())) {
 
             context.getModel().equation = context.getCommand().getValue();
-            context.getModel().full += context.getCommand().getValue();
 
             context.getModel().addRightLeaf(context.getModel().equation); //Right leaf
 
@@ -17,14 +16,12 @@ public class NextOpState implements State {
         else if (isOp(context.getCommand()) || isEquals(context.getCommand())) {
             context.getModel().onError = context.getModel().equation + "N";
             context.getModel().equation = "error";
-            context.getModel().full = "";
             context.setState(new ErrorState());
         }
         else if (isClear(context.getCommand())) {
             context.getModel().lhs = null;
             context.getModel().rhs = null;
             context.getModel().equation = "";
-            context.getModel().full = "";
             context.getModel().clearNodes();
             context.setState(new StartState());
         }

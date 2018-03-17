@@ -7,7 +7,6 @@ public class StartState implements State {
     public void handle(Controller context) {
         if (isDigit(context.getCommand())) {
             context.getModel().equation += context.getCommand().getValue();
-            context.getModel().full += context.getCommand().getValue();
             context.setState(new FirstOpState());
         }
     }

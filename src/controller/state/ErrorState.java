@@ -16,7 +16,6 @@ public class ErrorState implements State {
             context.getModel().lhs = null;
             context.getModel().rhs = null;
             context.getModel().equation = "";
-            context.getModel().full = "";
             context.getModel().clearNodes();
             context.setState(new StartState());
         }

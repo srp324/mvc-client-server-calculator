@@ -3,7 +3,6 @@ package model;
 public class CalcModel {
     public String equation;
     public String onError;
-    public String full; //TODO: Remove full
     public Integer lhs;
     public Integer rhs;
     public String prevOp;
@@ -12,7 +11,6 @@ public class CalcModel {
 
     public CalcModel() {
         equation = "";
-        full = "";
         prevOp = "";
         currOp = "";
     }
