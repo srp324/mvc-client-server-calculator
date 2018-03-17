@@ -3,7 +3,7 @@ Simple Calculator using MVC (Model-View-Controller) combined with Socket-based C
 
 #### Model: 
 ##### Composite Pattern, Visitor Pattern
-Equation tree built under Composite Pattern and traversed under a Visitor Pattern. There are two visitors, one to calculate the value of and the other to build a string of the equation structured, in a pre-order manner.
+Equation tree built using Composite Pattern and traversed under a Visitor Pattern. There are two visitors, one to calculate the value of and the other to build a string of the equation structured, in an in-order manner.
 
 #### View:
 ##### Observer Pattern (Observer/Subject)
