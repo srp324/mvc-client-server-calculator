@@ -29,13 +29,6 @@ public class Controller extends Observable {
             command = Command.DIGIT.getDigit(digit);
             state.handle(Controller.this);
 
-            /*
-            else if (state instanceof ErrorState) {
-                //TODO
-                System.out.println("State: ErrorOp");
-                model.update();
-            }*/
-
             setChanged();
             notifyObservers(model.equation);
         }
@@ -80,8 +73,8 @@ public class Controller extends Observable {
         view.getJbtDivide().addActionListener(new OpListener("/"));
         view.getJbtEqual().addActionListener(new OpListener("="));
         view.getJbtClear().addActionListener(new OpListener("C"));
-
-        //TODO: Set Reset and Discard Action Listeners
+        view.getJbtDiscard().addActionListener(new OpListener("Discard"));
+        view.getJbtReset().addActionListener(new OpListener("Reset"));
     }
 
     public void setState(State s) {

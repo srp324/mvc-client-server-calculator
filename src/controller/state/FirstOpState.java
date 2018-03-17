@@ -20,9 +20,7 @@ public class FirstOpState implements State {
             context.setState(new NextOpState());
         }
         else if (isEquals(context.getCommand())) {
-            //TODO: Discard/Reset
-            context.getModel().lhs = null;
-            context.getModel().rhs = null;
+            context.getModel().onError = context.getModel().equation + "F";
             context.getModel().equation = "error";
             context.getModel().full = "";
             context.setState(new ErrorState());

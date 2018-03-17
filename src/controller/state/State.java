@@ -3,7 +3,6 @@ package controller.state;
 import controller.Command;
 import controller.Controller;
 
-//TODO: Use the model's visitors
 public interface State {
     void handle(Controller context);
 

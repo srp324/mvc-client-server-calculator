@@ -21,9 +21,10 @@ public enum Command implements Serializable {
     SUB("-"),
     MULT("*"),
     DIV("/"),
-
     EQ("="),
-    CLEAR("C");
+    CLEAR("C"),
+    DISCARD("Discard"),
+    RESET("Reset");
 
     private final String value;
 
@@ -75,6 +76,10 @@ public enum Command implements Serializable {
                 return Command.EQ;
             case "C":
                 return Command.CLEAR;
+            case "Discard":
+                return Command.DISCARD;
+            case "Reset":
+                return Command.RESET;
         }
         return Command.OP;
     }

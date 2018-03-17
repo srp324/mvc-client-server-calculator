@@ -15,9 +15,7 @@ public class NextOpState implements State {
             context.setState(new SecondOpState());
         }
         else if (isOp(context.getCommand()) || isEquals(context.getCommand())) {
-            //TODO: Discard/Reset
-            context.getModel().lhs = null;
-            context.getModel().rhs = null;
+            context.getModel().onError = context.getModel().equation + "N";
             context.getModel().equation = "error";
             context.getModel().full = "";
             context.setState(new ErrorState());

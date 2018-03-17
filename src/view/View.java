@@ -90,6 +90,10 @@ public class View extends JFrame implements Observer {
             p1.setVisible(false);
             pError.setVisible(true);
         }
+        else {
+            p1.setVisible(true);
+            pError.setVisible(false);
+        }
 
         jtfResult.setText((String) arg);
     }
