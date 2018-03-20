@@ -7,67 +7,65 @@ import javax.swing.*;
 
 public class View extends JFrame implements Observer {
 
-    private JPanel main;
     private JPanel p1;
-    private JPanel p2;
     private JPanel pError;
 
-    private JButton jbtNum1;
-    private JButton jbtNum2;
-    private JButton jbtNum3;
-    private JButton jbtNum4;
-    private JButton jbtNum5;
-    private JButton jbtNum6;
-    private JButton jbtNum7;
-    private JButton jbtNum8;
-    private JButton jbtNum9;
-    private JButton jbtNum0;
+    private JButton jb1;
+    private JButton jb2;
+    private JButton jb3;
+    private JButton jb4;
+    private JButton jb5;
+    private JButton jb6;
+    private JButton jb7;
+    private JButton jb8;
+    private JButton jb9;
+    private JButton jb0;
 
-    private JButton jbtAdd;
-    private JButton jbtSubtract;
-    private JButton jbtMultiply;
-    private JButton jbtDivide;
-    private JButton jbtEqual;
-    private JButton jbtClear;
-    private JTextField jtfResult;
+    private JButton jbAdd;
+    private JButton jbSub;
+    private JButton jbMult;
+    private JButton jbDiv;
+    private JButton jbEqual;
+    private JButton jbClear;
+    private JTextField jtfDisplay;
 
-    private JButton jbtDiscard;
-    private JButton jbtReset;
+    private JButton jbDiscard;
+    private JButton jbReset;
 
     public View() {
 
-        main = new JPanel();
+        JPanel main = new JPanel();
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
 
         p1 = new JPanel();
         p1.setLayout(new GridLayout(4, 4));
-        p1.add(jbtNum1 = new JButton("1"));
-        p1.add(jbtNum2 = new JButton("2"));
-        p1.add(jbtNum3 = new JButton("3"));
-        p1.add(jbtAdd = new JButton("+"));
-        p1.add(jbtNum4 = new JButton("4"));
-        p1.add(jbtNum5 = new JButton("5"));
-        p1.add(jbtNum6 = new JButton("6"));
-        p1.add(jbtSubtract = new JButton("-"));
-        p1.add(jbtNum7 = new JButton("7"));
-        p1.add(jbtNum8 = new JButton("8"));
-        p1.add(jbtNum9 = new JButton("9"));
-        p1.add(jbtMultiply = new JButton("*"));
-        p1.add(jbtNum0 = new JButton("0"));
-        p1.add(jbtEqual = new JButton("="));
-        p1.add(jbtClear = new JButton("C"));
-        p1.add(jbtDivide = new JButton("/"));
+        p1.add(jb1 = new JButton("1"));
+        p1.add(jb2 = new JButton("2"));
+        p1.add(jb3 = new JButton("3"));
+        p1.add(jbAdd = new JButton("+"));
+        p1.add(jb4 = new JButton("4"));
+        p1.add(jb5 = new JButton("5"));
+        p1.add(jb6 = new JButton("6"));
+        p1.add(jbSub = new JButton("-"));
+        p1.add(jb7 = new JButton("7"));
+        p1.add(jb8 = new JButton("8"));
+        p1.add(jb9 = new JButton("9"));
+        p1.add(jbMult = new JButton("*"));
+        p1.add(jb0 = new JButton("0"));
+        p1.add(jbEqual = new JButton("="));
+        p1.add(jbClear = new JButton("C"));
+        p1.add(jbDiv = new JButton("/"));
 
-        p2 = new JPanel();
+        JPanel p2 = new JPanel();
         p2.setLayout(new FlowLayout());
-        p2.add(jtfResult = new JTextField(20));
-        jtfResult.setHorizontalAlignment(JTextField.RIGHT);
-        jtfResult.setEditable(false);
+        p2.add(jtfDisplay = new JTextField(20));
+        jtfDisplay.setHorizontalAlignment(JTextField.RIGHT);
+        jtfDisplay.setEditable(false);
 
         pError = new JPanel();
         pError.setLayout(new GridLayout(2,2));
-        pError.add(jbtDiscard = new JButton("Discard"));
-        pError.add(jbtReset = new JButton("Reset"));
+        pError.add(jbDiscard = new JButton("Discard"));
+        pError.add(jbReset = new JButton("Reset"));
         pError.setVisible(false);
 
         main.add(p2);
@@ -95,78 +93,78 @@ public class View extends JFrame implements Observer {
             pError.setVisible(false);
         }
 
-        jtfResult.setText((String) arg);
+        jtfDisplay.setText((String) arg);
     }
 
-    public JButton getJbtNum1() {
-        return jbtNum1;
+    public JButton getJb1() {
+        return jb1;
     }
 
-    public JButton getJbtNum2() {
-        return jbtNum2;
+    public JButton getJb2() {
+        return jb2;
     }
 
-    public JButton getJbtNum3() {
-        return jbtNum3;
+    public JButton getJb3() {
+        return jb3;
     }
 
-    public JButton getJbtNum4() {
-        return jbtNum4;
+    public JButton getJb4() {
+        return jb4;
     }
 
-    public JButton getJbtNum5() {
-        return jbtNum5;
+    public JButton getJb5() {
+        return jb5;
     }
 
-    public JButton getJbtNum6() {
-        return jbtNum6;
+    public JButton getJb6() {
+        return jb6;
     }
 
-    public JButton getJbtNum7() {
-        return jbtNum7;
+    public JButton getJb7() {
+        return jb7;
     }
 
-    public JButton getJbtNum8() {
-        return jbtNum8;
+    public JButton getJb8() {
+        return jb8;
     }
 
-    public JButton getJbtNum9() {
-        return jbtNum9;
+    public JButton getJb9() {
+        return jb9;
     }
 
-    public JButton getJbtNum0() {
-        return jbtNum0;
+    public JButton getJb0() {
+        return jb0;
     }
 
-    public JButton getJbtAdd() {
-        return jbtAdd;
+    public JButton getJbAdd() {
+        return jbAdd;
     }
 
-    public JButton getJbtSubtract() {
-        return jbtSubtract;
+    public JButton getJbSub() {
+        return jbSub;
     }
 
-    public JButton getJbtMultiply() {
-        return jbtMultiply;
+    public JButton getJbMult() {
+        return jbMult;
     }
 
-    public JButton getJbtDivide() {
-        return jbtDivide;
+    public JButton getJbDiv() {
+        return jbDiv;
     }
 
-    public JButton getJbtEqual() {
-        return jbtEqual;
+    public JButton getJbEqual() {
+        return jbEqual;
     }
 
-    public JButton getJbtClear() {
-        return jbtClear;
+    public JButton getJbClear() {
+        return jbClear;
     }
 
-    public JButton getJbtDiscard() {
-        return jbtDiscard;
+    public JButton getJbDiscard() {
+        return jbDiscard;
     }
 
-    public JButton getJbtReset() {
-        return jbtReset;
+    public JButton getJbReset() {
+        return jbReset;
     }
 }

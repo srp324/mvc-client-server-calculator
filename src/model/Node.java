@@ -1,9 +1,9 @@
 package model;
 
 public class Node implements TreeComponent {
-    String label;
-    TreeComponent left;
-    TreeComponent right;
+    private String label;
+    private TreeComponent left;
+    private TreeComponent right;
 
     public Node(String _label, TreeComponent _left, TreeComponent _right) {
         label = _label;

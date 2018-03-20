@@ -9,41 +9,41 @@ public class SecondOpState implements State {
     @Override
     public void handle(Controller context) {
         if (isDigit(context.getCommand())) {
-            context.getModel().equation += context.getCommand().getValue();
-            context.getModel().addRightLeaf(context.getModel().equation);
+            context.getModel().setEquation(context.getModel().getEquation() + context.getCommand().getValue());
+            context.getModel().addRightLeaf(context.getModel().getEquation());
         }
         else if (isOp(context.getCommand())) {
             context.getModel().addNode(context.getCommand().getValue());
 
-            context.getModel().prevOp = context.getModel().currOp;
-            context.getModel().currOp = context.getCommand().getValue();
+            context.getModel().setPrevOp(context.getModel().getCurrOp());
+            context.getModel().setCurrOp(context.getCommand().getValue());
 
-            context.getModel().rhs = Integer.parseInt(context.getModel().equation);
-            switch (context.getModel().prevOp) {
+            context.getModel().setRhs(Integer.parseInt(context.getModel().getEquation()));
+            switch (context.getModel().getPrevOp()) {
                 case "+":
-                    context.getModel().equation = Integer.toString(context.getModel().lhs + context.getModel().rhs);
+                    context.getModel().setEquation(Integer.toString(context.getModel().getLhs() + context.getModel().getRhs()));
                     break;
                 case "-":
-                    context.getModel().equation = Integer.toString(context.getModel().lhs - context.getModel().rhs);
+                    context.getModel().setEquation(Integer.toString(context.getModel().getLhs() - context.getModel().getRhs()));
                     break;
                 case "*":
-                    context.getModel().equation = Integer.toString(context.getModel().lhs * context.getModel().rhs);
+                    context.getModel().setEquation(Integer.toString(context.getModel().getLhs() * context.getModel().getRhs()));
                     break;
                 case "/":
-                    if (context.getModel().rhs == 0) {
-                        context.getModel().onError = "S";
-                        context.getModel().equation = "error";
+                    if (context.getModel().getRhs() == 0) {
+                        context.getModel().setOnError("S");
+                        context.getModel().setEquation("error");
                         context.setState(new ErrorState());
                         return;
                     }
                     else
-                        context.getModel().equation = Integer.toString(context.getModel().lhs / context.getModel().rhs);
+                        context.getModel().setEquation(Integer.toString(context.getModel().getLhs() / context.getModel().getLhs()));
                     break;
             }
 
             CalcVisitor cv = new CalcVisitor();
             context.getModel().getTree().accept(cv);
-            context.getModel().lhs = cv.getValue();
+            context.getModel().setLhs(cv.getValue());
             cv.setValue(0);
 
             FullVisitor fv = new FullVisitor();
@@ -51,27 +51,27 @@ public class SecondOpState implements State {
             context.setState(new NextOpState());
         }
         else if (isEquals(context.getCommand())) {
-            if (context.getModel().currOp.equals("/") && context.getModel().equation.equals("0")) {
-                context.getModel().onError = "S";
-                context.getModel().equation = "error";
+            if (context.getModel().getCurrOp().equals("/") && context.getModel().getEquation().equals("0")) {
+                context.getModel().setOnError("S");
+                context.getModel().setEquation("error");
                 context.setState(new ErrorState());
                 return;
             }
                 CalcVisitor cv = new CalcVisitor();
                 context.getModel().getTree().accept(cv);
-                context.getModel().lhs = cv.getValue();
+                context.getModel().setLhs( cv.getValue());
                 cv.setValue(0);
 
                 FullVisitor fv = new FullVisitor();
                 context.getModel().getTree().accept(fv);
-                Client.sendMsg(fv.getFull() + " = " + context.getModel().lhs);
-                context.getModel().equation = Integer.toString(context.getModel().lhs);
+                Client.sendMsg(fv.getFull() + " = " + context.getModel().getLhs());
+                context.getModel().setEquation(Integer.toString(context.getModel().getLhs()));
                 context.setState(new CalcState());
         }
         else if (isClear(context.getCommand())) {
-            context.getModel().lhs = null;
-            context.getModel().rhs = null;
-            context.getModel().equation = "";
+            context.getModel().setLhs(null);
+            context.getModel().setRhs(null);
+            context.getModel().setEquation("");
             context.getModel().clearNodes();
             context.setState(new StartState());
         }

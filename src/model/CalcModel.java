@@ -1,13 +1,13 @@
 package model;
 
 public class CalcModel {
-    public String equation;
-    public String onError;
-    public Integer lhs;
-    public Integer rhs;
-    public String prevOp;
-    public String currOp;
-    TreeComponent tree;
+    private String equation;
+    private String onError;
+    private Integer lhs;
+    private Integer rhs;
+    private String prevOp;
+    private String currOp;
+    private TreeComponent tree;
 
     public CalcModel() {
         equation = "";
@@ -28,9 +28,57 @@ public class CalcModel {
             tree = new Node(op, null, new Leaf(val));
     }
     public void addRightLeaf(String digit) {
-        tree = new Node(((Node) tree).label, ((Node) tree).getLeft(), new Leaf(digit));
+        tree = new Node(((Node) tree).getLabel(), ((Node) tree).getLeft(), new Leaf(digit));
     }
     public void clearNodes() {
         tree = v -> {};
+    }
+
+    public String getEquation() {
+        return equation;
+    }
+
+    public void setEquation(String equation) {
+        this.equation = equation;
+    }
+
+    public String getOnError() {
+        return onError;
+    }
+
+    public void setOnError(String onError) {
+        this.onError = onError;
+    }
+
+    public Integer getLhs() {
+        return lhs;
+    }
+
+    public void setLhs(Integer lhs) {
+        this.lhs = lhs;
+    }
+
+    public Integer getRhs() {
+        return rhs;
+    }
+
+    public void setRhs(Integer rhs) {
+        this.rhs = rhs;
+    }
+
+    public String getPrevOp() {
+        return prevOp;
+    }
+
+    public void setPrevOp(String prevOp) {
+        this.prevOp = prevOp;
+    }
+
+    public String getCurrOp() {
+        return currOp;
+    }
+
+    public void setCurrOp(String currOp) {
+        this.currOp = currOp;
     }
 }

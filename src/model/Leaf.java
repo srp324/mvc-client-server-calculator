@@ -2,7 +2,7 @@ package model;
 
 public class Leaf implements TreeComponent {
 
-    String label;
+    private String label;
 
     public Leaf(String _label) {
         label = _label;

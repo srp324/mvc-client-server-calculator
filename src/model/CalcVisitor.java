@@ -10,29 +10,29 @@ public class CalcVisitor implements Visitor {
 
     @Override
     public void visitPreNode(Node node) {
-        ops.add(node.label);
+        ops.add(node.getLabel());
         count++;
     }
 
     @Override
     public void visitLeaf(Leaf leaf) {
         if (side == 0) {
-            value = Integer.parseInt(leaf.label);
+            value = Integer.parseInt(leaf.getLabel());
             side = 1;
         }
         else if (side == 1) {
             switch (ops.get(count-1)) {
                 case "+":
-                    value += Integer.parseInt(leaf.label);
+                    value += Integer.parseInt(leaf.getLabel());
                     break;
                 case "-":
-                    value -= Integer.parseInt(leaf.label);
+                    value -= Integer.parseInt(leaf.getLabel());
                     break;
                 case "*":
-                    value *= Integer.parseInt(leaf.label);
+                    value *= Integer.parseInt(leaf.getLabel());
                     break;
                 case "/":
-                    value /= Integer.parseInt(leaf.label);
+                    value /= Integer.parseInt(leaf.getLabel());
                     break;
             }
         }

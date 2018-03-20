@@ -6,26 +6,26 @@ public class FirstOpState implements State {
     @Override
     public void handle(Controller context) {
         if (isDigit(context.getCommand())) {
-            context.getModel().equation += context.getCommand().getValue();
+            context.getModel().setEquation(context.getModel().getEquation() + context.getCommand().getValue());
         }
         else if (isOp(context.getCommand())) {
-            context.getModel().addNode(context.getCommand().getValue(), context.getModel().equation, true); //Left leaf
+            context.getModel().addNode(context.getCommand().getValue(), context.getModel().getEquation(), true); //Left leaf
 
-            context.getModel().currOp = context.getCommand().getValue();
+            context.getModel().setCurrOp(context.getCommand().getValue());
 
-            context.getModel().lhs = Integer.parseInt(context.getModel().equation);
-            context.getModel().equation = "";
+            context.getModel().setLhs(Integer.parseInt(context.getModel().getEquation()));
+            context.getModel().setEquation("");
             context.setState(new NextOpState());
         }
         else if (isEquals(context.getCommand())) {
-            context.getModel().onError = context.getModel().equation + "F";
-            context.getModel().equation = "error";
+            context.getModel().setOnError(context.getModel().getEquation() + "F");
+            context.getModel().setEquation("error");
             context.setState(new ErrorState());
         }
         else if (isClear(context.getCommand())) {
-            context.getModel().lhs = null;
-            context.getModel().rhs = null;
-            context.getModel().equation = "";
+            context.getModel().setLhs(null);
+            context.getModel().setRhs(null);
+            context.getModel().setEquation("");
             context.getModel().clearNodes();
             context.setState(new StartState());
         }

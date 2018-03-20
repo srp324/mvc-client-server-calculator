@@ -9,10 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 
 public class Controller extends Observable {
-    View view;
-    CalcModel model;
-    State state;
-    Command command;
+    private View view;
+    private CalcModel model;
+    private State state;
+    private Command command;
 
     public Controller() {
         state = new StartState();
@@ -30,7 +30,7 @@ public class Controller extends Observable {
             state.handle(Controller.this);
 
             setChanged();
-            notifyObservers(model.equation);
+            notifyObservers(model.getEquation());
         }
     }
 
@@ -46,7 +46,7 @@ public class Controller extends Observable {
             state.handle(Controller.this);
 
             setChanged();
-            notifyObservers(model.equation);
+            notifyObservers(model.getEquation());
         }
     }
 
@@ -57,24 +57,24 @@ public class Controller extends Observable {
     public void setView(View _view) {
         view = _view;
 
-        view.getJbtNum1().addActionListener(new DigitListener(1));
-        view.getJbtNum2().addActionListener(new DigitListener(2));
-        view.getJbtNum3().addActionListener(new DigitListener(3));
-        view.getJbtNum4().addActionListener(new DigitListener(4));
-        view.getJbtNum5().addActionListener(new DigitListener(5));
-        view.getJbtNum6().addActionListener(new DigitListener(6));
-        view.getJbtNum7().addActionListener(new DigitListener(7));
-        view.getJbtNum8().addActionListener(new DigitListener(8));
-        view.getJbtNum9().addActionListener(new DigitListener(9));
-        view.getJbtNum0().addActionListener(new DigitListener(0));
-        view.getJbtAdd().addActionListener(new OpListener("+"));
-        view.getJbtSubtract().addActionListener(new OpListener("-"));
-        view.getJbtMultiply().addActionListener(new OpListener("*"));
-        view.getJbtDivide().addActionListener(new OpListener("/"));
-        view.getJbtEqual().addActionListener(new OpListener("="));
-        view.getJbtClear().addActionListener(new OpListener("C"));
-        view.getJbtDiscard().addActionListener(new OpListener("Discard"));
-        view.getJbtReset().addActionListener(new OpListener("Reset"));
+        view.getJb1().addActionListener(new DigitListener(1));
+        view.getJb2().addActionListener(new DigitListener(2));
+        view.getJb3().addActionListener(new DigitListener(3));
+        view.getJb4().addActionListener(new DigitListener(4));
+        view.getJb5().addActionListener(new DigitListener(5));
+        view.getJb6().addActionListener(new DigitListener(6));
+        view.getJb7().addActionListener(new DigitListener(7));
+        view.getJb8().addActionListener(new DigitListener(8));
+        view.getJb9().addActionListener(new DigitListener(9));
+        view.getJb0().addActionListener(new DigitListener(0));
+        view.getJbAdd().addActionListener(new OpListener("+"));
+        view.getJbSub().addActionListener(new OpListener("-"));
+        view.getJbMult().addActionListener(new OpListener("*"));
+        view.getJbDiv().addActionListener(new OpListener("/"));
+        view.getJbEqual().addActionListener(new OpListener("="));
+        view.getJbClear().addActionListener(new OpListener("C"));
+        view.getJbDiscard().addActionListener(new OpListener("Discard"));
+        view.getJbReset().addActionListener(new OpListener("Reset"));
     }
 
     public void setState(State s) {
