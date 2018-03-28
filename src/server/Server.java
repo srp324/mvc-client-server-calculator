@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-//TODO: Split Server and Client
 public class Server {
     private static Integer count;
 

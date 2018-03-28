@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
 
+//TODO: Replace Integer with Doubles?
 public class View extends JFrame implements Observer {
 
     private JPanel p1;
