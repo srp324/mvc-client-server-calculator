@@ -15,3 +15,5 @@ The Controller keeps track of the current State and is the Context to be accesse
 
 #### Client-Server:
 Rich client based. Every time an equation is solved, the client sends the full equation to the Server to be printed. The Server also prints a count of the total number of equations solved by all clients.
+
+![alt text](https://raw.githubusercontent.com/srp324/mvc-client-server-calculator/master/UML%20Class%20Diagram.png)
